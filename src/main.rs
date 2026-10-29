@@ -183,7 +183,8 @@ fn print_once(view: View) {
     let m = &app.snap.mem;
     let total_pss: u64 = app.snap.procs.iter().map(|p| p.pss).sum();
     eprintln!(
-        "\nsum PSS {} · used RAM (total-available) {} · swap used {}",
+        "\nsum of process memory ({}) {} · used RAM (total-available) {} · swap used {}",
+        if app.snap.detailed { "PSS" } else { "RSS" },
         ui::human(total_pss),
         ui::human(m.used()),
         ui::human(m.swap_used())
